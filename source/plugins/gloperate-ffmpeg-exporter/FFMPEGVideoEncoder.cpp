@@ -23,6 +23,21 @@ extern "C" {
 #define av_frame_alloc  avcodec_alloc_frame
 #endif
 
+/* ffmpeg-4.1 (maybe earlier versions do, too) does not define
+ * CODEC_FLAG_GLOBAL_HEADER but instead AV_CODEC_FLAG_GLOBAL_HEADER */
+#ifdef AV_CODEC_FLAG_GLOBAL_HEADER
+#define CODEC_FLAG_GLOBAL_HEADER AV_CODEC_FLAG_GLOBAL_HEADER
+#endif
+
+/* ffmpeg-4.1 (maybe earlier versions do, too) does not define
+ * AVFMT_RAWPICTURE ... maybe related to:
+ * https://lists.ffmpeg.org/pipermail/ffmpeg-cvslog/2015-October/094568.html
+ * "There are no formats supporting it anymore and it is deprecated." */
+#ifndef AVFMT_RAWPICTURE
+#define AVFMT_RAWPICTURE 0x0020
+#endif
+
+
 
 #include <glbinding/gl/enum.h>
 
